@@ -1,0 +1,32 @@
+<include file="./Public/header.html" />
+</div>
+修改
+<form action="__URL__/domodify" method="post">
+<input type="hidden" name="id" value="<{$data[0].id}>" />
+<table>
+	<tr>
+		<td>用户名</td><td><input type="text" name="userid" value="<{$data[0].userid}>" /></td>
+	</tr>
+	<tr>
+		<td>姓名</td><td><input type="text" name="username" value="<{$data[0].username}>" /></td>
+	</tr>
+	<tr>
+		<td>子公司</td>
+		<td>
+			<input type="radio" name="subcompany" value="0" <{$data[0]['subcompany']==1?"checked":"" }>/>集团
+			<input type="radio" name="subcompany" value="1" <{$data[0]['subcompany']==1?"checked":"" }>/>南部
+			<input type="radio" name="subcompany" value="2" <{$data[0]['subcompany']==2?"checked":"" }>/>北部
+			<input type="radio" name="subcompany" value="3" <{$data[0]['subcompany']==3?"checked":"" }>/>中部
+			<input type="radio" name="subcompany" value="3" <{$data[0]['subcompany']==4?"checked":"" }>/>玫瑰
+		</td>
+	</tr>
+	<tr><td>层级</td>
+		<td>
+			<input type="radio" name="level" value="0" <{$data[0]['level']==0?"checked":"" }>/>浏览
+			<input type="radio" name="level" value="2" <{$data[0]['level']==2?"checked":"" }>/>普通
+			<input type="radio" name="level" value="1" <{$data[0]['level']==1?"checked":"" }>/>管理员
+		</td>
+	</tr>
+	<tr><td colspan="2"><input type="submit" value="修改" /></td></tr>
+</table>	
+</form>

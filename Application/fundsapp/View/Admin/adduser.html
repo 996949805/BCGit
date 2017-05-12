@@ -1,0 +1,26 @@
+<include file="./Public/header.html" />
+</div>
+<form action="doadduser" method="post">
+<table>
+	<tr><td>用户名</td><td><input type="text" name="userid" /></td></tr>
+	<tr><td>姓名</td><td><input type="text" name="username" /></td></tr>
+	<tr>
+		<td>子公司</td>
+		<td>
+			<input type="radio" name="subcompany" value="0" />集团
+			<input type="radio" name="subcompany" value="1" />南部
+			<input type="radio" name="subcompany" value="2" />北部
+			<input type="radio" name="subcompany" value="3" />中部
+			<input type="radio" name="subcompany" value="4" />玫瑰
+		</td>
+	</tr>
+	<tr><td>层级</td>
+		<td>
+			<input type="radio" name="level" value="3" />浏览
+			<input type="radio" name="level" value="2" />普通
+			<input type="radio" name="level" value="1" />管理员
+		</td>
+	</tr>
+	<tr><td colspan="2"><input type="submit" value="添加" /></td></tr>
+</table>	
+</form>

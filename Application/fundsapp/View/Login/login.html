@@ -1,0 +1,22 @@
+<include file="./Public/header.html" />
+<script type="text/javascript">
+	function tosubmit(){
+		$('form[name="loginform"]').submit();
+	}
+</script>
+
+
+<form action='__URL__/dologin' method="post" name='loginform'>
+<table>
+	<tr><td colspan="2">登录验证</td></tr>
+	<tr><td>用　户</td><td><input type="text" name="userid" value=''/></td></tr>
+	<tr><td>密　码</td><td><input type="password" name="password" value=''/></td></tr>
+	<!-- <tr><td>验证码</td><td><input type="text" name="verifycode" value="" /></td></tr>
+	<tr><td></td><td><img src="<{:U('login/verifycode')}>" onclick="this.src=this.src+'?'+Math.random()"></td></tr> -->
+	<tr><td colspan="2">
+		<div class='submitbutton'>
+			<button onclick="tosubmit()" class='submitbutton'>登录</button>
+		</div>
+	</td></tr>
+</table>
+</form>

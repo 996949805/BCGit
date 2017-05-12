@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>资金日报系统</title>
+	<script type="text/javascript" src="__PUBLIC__/Js/jquery-1.7.2.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/basic.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/<{$Think.CONTROLLER_NAME}>.css" />
+</head>
+<body>
+<div style="font-size:15px;">
+当前用户:<{$Think.session.username}>|
+所属区域:<switch name="Think.session.subcompany">
+			<case value="1">南部</case>
+			<case value="2">北部</case>
+			<case value="3">中部</case>
+			<case value="4">玫瑰</case>
+			<case value="0">集团</case>
+			<default />未定义
+		</switch>|
+层级:<switch name="Think.session.level">
+		<case value="1">管理员</case>
+		<case value="2">普通用户</case>
+		<case value="3">浏览</case>
+		<default />未定义
+	</switch>|
+<a href="__APP__/Login/dologout">注销</a> 
+|<a href="__APP__/Login/changepassword">修改密码</a>

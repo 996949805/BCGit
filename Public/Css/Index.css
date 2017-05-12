@@ -1,0 +1,39 @@
+table {
+	table-layout:fixed
+}
+
+.maindiv tr:hover td {
+  background: #98FB98;
+}
+
+.month_sum {
+  font-weight: bold;
+  color:#036DFB;
+}
+
+input {
+	text-align: right;
+}
+
+.dataview	{
+	text-align: right;
+}
+
+table tr.sum_month td	{
+	background-color: #F0F0C0;
+	font-weight: bold;
+}
+
+div.div_category	{
+	width:80px;	
+	display:inline-block;
+}
+
+div.div_titlename	{
+	width:140px;
+	display:inline-block;
+}
+
+tr td {
+	padding: 3px;
+}

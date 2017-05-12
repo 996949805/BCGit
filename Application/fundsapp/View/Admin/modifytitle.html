@@ -1,0 +1,32 @@
+<include file="./Public/header.html" />
+</div>
+修改
+<form action="__URL__/domodifytitle" method="post">
+<input type="hidden" name="id" value="<{$data.id}>" />
+<table>
+	<tr>
+		<td>分类</td><td><input type="text" name="category" value="<{$data['category']}>" /></td>
+	</tr>	
+	<tr>
+		<td>项目名称</td><td><input type="text" name="titlename" value="<{$data['titlename']}>" /></td>
+	</tr>
+	<tr>
+		<td>分配子公司</td>
+		<td>
+			<input type="radio" name="subcompany" value="0" <{$data['subcompany']==0?"checked":"" }>/>全部
+			<input type="radio" name="subcompany" value="1" <{$data['subcompany']==1?"checked":"" }>/>南部
+			<input type="radio" name="subcompany" value="2" <{$data['subcompany']==2?"checked":"" }>/>北部
+			<input type="radio" name="subcompany" value="3" <{$data['subcompany']==3?"checked":"" }>/>中部
+			<input type="radio" name="subcompany" value="3" <{$data['subcompany']==4?"checked":"" }>/>玫瑰
+		</td>
+	</tr>
+	<tr><td>显示顺序</td>
+		<td><input type="text" name="showorder" value="<{$data['showorder']}>" /></td>
+	</tr>	
+	<tr><td>数据项</td>
+		<td><input type="radio" name="isdata" value='1' <{$data['isdata']==1?'checked':''}> />数据项
+		<input type="radio" name="isdata" value='0' <{$data['isdata']==0?'checked':''}> />统计项</td>
+	</tr>
+	<tr><td colspan="2"><input type="submit" value="修改" /></td></tr>
+</table>	
+</form>

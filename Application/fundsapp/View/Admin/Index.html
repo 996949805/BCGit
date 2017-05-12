@@ -1,0 +1,73 @@
+<include file="./Public/header.html" />
+</div>
+<hr>
+<a href="__URL__/adduser">添加用户</a>
+<table>
+	<tr>
+		<th>用户名</th>
+		<th>姓名</th>
+		<th>子公司</th>
+		<th>层级</th>
+		<th>操作</th>
+
+	</tr>
+<foreach name='data' item='vo'>
+	<tr>
+		<td><{$vo.userid}></td>
+		<td><{$vo.username}></td>
+		<td>
+			<switch name="vo.subcompany">
+				<case value="0">南部</case>
+				<case value="1">南部</case>
+				<case value="2">北部</case>
+				<case value="3">中部</case>
+				<case value="4">玫瑰</case>
+				<default />未定义
+			</switch>
+			
+		</td>
+		<td>
+			<switch name="vo.level">
+				<case value="1">管理员</case>
+				<case value="2">普通用户</case>
+				<case value="0">浏览</case>
+				<default />未定义
+			</switch>
+		</td>
+		<td><a href="__URL__/modify/id/<{$vo.id}>">修改</a>|<a href="__URL__/dodelete/id/<{$vo.id}>">删除</a></td>
+	</tr>
+</foreach>
+</table>
+<hr>
+<a href="__URL__/addtitle">添加数据项</a>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>分类</th>
+		<th>项目名称</th>
+		<th>分配</th>
+		<th>显示顺序</th>
+		<th>类型</th>
+		<th>操作</th>
+	</tr>
+	<foreach name='data2' item='vo'>
+		<tr>
+			<td><{$vo.id}></td>
+			<td><{$vo.category}></td>
+			<td><{$vo.titlename}></td>
+			<td>
+				<switch name="vo.subcompany">
+					<case value="0">集团</case>
+					<case value="1">南部</case>
+					<case value="2">北部</case>
+					<case value="3">中部</case>
+					<case value="4">玫瑰</case>
+					<default />未定义
+				</switch>
+			</td>
+			<td><{$vo.showorder}></td>
+			<td><{$vo['isdata']==1?'':'<b>统计项</b>'}></td>
+			<td><a href="__URL__/modifytitle/id/<{$vo.id}>">修改</a>|<a href="__URL__/toinvalid/id/<{$vo.id}>">失效</a></td>
+		</tr>
+	</foreach>
+</table>

@@ -1,0 +1,52 @@
+body{
+	font-family: "宋体";
+	font-size: 10px;
+}
+.maindiv tr:hover td {
+  background: #98FB98;
+}
+
+div.div_category	{
+	width:80px;	
+	display:inline-block;
+}
+
+div.div_titlename	{
+	width:140px;
+	display:inline-block;
+}
+.dataview	{
+	text-align: right;
+}
+
+.color1{
+	background: #DDDDFF	
+}
+
+.color2{
+	background: #D7FFEE
+}
+
+.color3{
+	background: #FFE4CA
+}
+
+.color4{
+	background: #D8D8EB
+}
+
+.color5{
+	background: #FFD0FF
+}
+
+.titlehead{
+	text-align: center;
+}
+
+tr td {
+	padding: 3px;
+}
+
+.hj {
+	font-weight: bold;
+}

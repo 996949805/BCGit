@@ -1,0 +1,96 @@
+<include file='./Public/header.html' />
+<script type="text/javascript">
+$(function(){
+	$("input:text[class='daydata']").keyup(function(e) {  //keypress
+		var keycode = (e.keyCode ? e.keyCode : e.which);
+	        var inputs = $("body").find(":text[class='daydata']"); // 获取表单中的所有输入框  
+	        var idx = inputs.index(this); // 获取当前焦点输入框所处的位置  
+	    if (keycode == 13 || keycode==40) {
+	        if (idx == inputs.length - 1) {// 判断是否是最后一个输入框  
+	        	$("#endbutton").focus();
+	             // if (confirm("最后一个输入框已经输入,是否提交?")); // 用户确认  
+	        } else {  
+	            inputs[idx + 1].focus(); // 设置焦点  
+	            inputs[idx + 1].select(); // 选中文字  
+	        }  
+	        // return false;// 取消默认的提交行为  
+	    }else if(keycode==38){
+	            inputs[idx - 1].focus(); // 设置焦点  
+	            inputs[idx - 1].select(); // 选中文字  
+	    }
+	})  
+});
+		$(function(){
+		$(".daydata").bind('change',function(){
+			var val=eval($(this).val());
+			// alert(val);
+			var id=$(this).attr('id');
+			$.get("__URL__/ajaxdata/id/"+id+"/val/"+val+"/day/<{$day}>",function(result){
+				// $("span[id="+result+"]").text(result);
+				if (result>0){
+					$("span[id="+result+"]").text("√");
+				}
+			});
+		});
+	});
+</script>
+<a href="__URL__/index">返回</a> | <b>操作日期：<{$yearmonth}>-<{$day==0?'预测':$day}></b> 
+</div>
+<hr>
+<h3 style="color:red"><b>注意：可在录入框内使用计算式，系统会自动运算,如: 1+2+3-1；如录入数值已被记录，录入框旁会出现√；完成输入后，务必点击左下角的"保存并计算"按钮；每次计算操作都会对整个月的数据进行计算</b></h3>
+<table class='datagrid'>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<th><div class='div_category'>类别</div></th><th><div class='div_titlename'>项目</div></th><th>数值</th>
+				</tr>
+				<volist name="data1" id="vo">
+				<tr>
+					<td><{$vo.category}></td>
+					<td><{$vo.titlename}><{$vo.titleid}></td>
+					<td><input class='daydata' type="text" value="<{$vo['day']==0?'':$vo['day']}>" id='<{$vo['id']}>' 
+							<php>if (($day!=1 && $day!=0) && ($vo['titleid']==3 || $vo['titleid']==4) ) echo 'disabled="disabled"';</php>  />
+							<span id='<{$vo.id}>'>&nbsp;&nbsp;&nbsp;</span></td>
+				</tr>
+				</volist>
+			</table>
+		</td>
+		<td>
+			<table>
+				<tr>
+					<th><div class='div_category'>类别</div></th><th><div class='div_titlename'>项目</div></th><th>数值</th>
+				</tr>
+				<volist name="data2" id="vo">
+				<tr>
+					<td><{$vo['category']}></td>
+					<td><{$vo['titlename']}><{$vo['titleid']}></td>
+					<td><input class='daydata' type="text" value="<{$vo['day']==0?'':$vo['day']}>" id='<{$vo['id']}>' />
+						<span id='<{$vo['id']}>'>&nbsp;&nbsp;</span></td>
+				</tr>
+				</volist>
+			</table>			
+		</td>
+		<td>
+			<table border='1' class='lasttable'>
+				<tr>
+					<th><div class='div_category'>类别</div></th><th><div class='div_titlename'>项目</div></th><th>数值</th>
+				</tr>
+				<volist name="data3" id="vo" >
+				<tr>
+					<td><{$vo['category']}></td>
+					<td><{$vo['titlename']}><{$vo['titleid']}></td>
+					<td><input class='daydata' type="text" value="<{$vo['day']==0?'':$vo['day']}>" id='<{$vo['id']}>' />
+						<span id='<{$vo['id']}>'>&nbsp;&nbsp;</span></td>
+				</tr>
+				</volist>
+			</table>	
+		</td>
+	</tr>
+	<form action='__URL__/domodifydata/yearmonth/<{$yearmonth}>/subcompany/<{$Think.session.subcompany}>' method="get">
+	<tr><td colspan="3"><span style="vertical-align:top;display:inline-block;font-weight:bold" >备注</span><textarea name="memo" cols="180" rows="10"><{$memo}></textarea></td></tr>
+	<tr><td colspan="3"><input type="submit" value="保存并计算" /></form></td>
+	</tr>
+</table>
+
+

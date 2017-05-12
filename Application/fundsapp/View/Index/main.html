@@ -1,0 +1,131 @@
+<include file='./Public/header.html' />
+
+||<b>当前月度：<{$yearmonth}></b>
+<form method="post" action="index" style="display:inline;" id="selectym">
+	选择时间区间<select name="yearmonth" onchange="toym();">
+		<foreach name="yearmonthlist" item="vo">
+			<option value="<{$vo['yearmonth']}>" <php>if ($vo['yearmonth']==$yearmonth) echo "selected='selected'";</php>><{$vo['yearmonth']}></option>
+		</foreach>
+	</select>
+	<!-- <input type="submit" value="确定" /> -->
+</form>
+|<a href="__URL__/exportexcel/yearmonth/<{$yearmonth}>">输出EXCEL</a>
+<!-- |<a href='__URL__/<{$_SESSION['mainshowall']==1?"chgmainnotshowall":"chgmainshowall"}>'><{$_SESSION['mainshowall']==1?"部分显示":"全部显示"}></a> -->
+</div>
+<script type="text/javascript">
+function toym(){
+	$("#selectym").submit();
+}
+
+function Convert(amtStr) {
+       var a, renum = '';
+       var j = 0;
+       var a1 = '', a2 = '', a3 = '';
+       var tes = /^-/;
+       a = String(amtStr).replace(/,/g, "");
+       a = a.replace(/[^-\.,0-9]/g, ""); //删除无效字符
+       a = a.replace(/(^\s*)|(\s*$)/g, ""); //trim
+       if (tes.test(a)) a1 = '-';
+       else a1 = '';
+       a = a.replace(/-/g, "");
+       if (a != "0" && a.substr(0, 2) != "0.") a = a.replace(/^0*/g, "");
+       j = a.indexOf('.'); if (j < 0) j = a.length; a2 = a.substr(0, j); a3 = a.substr(j); j = 0;
+       for (i = a2.length; i > 3; i = i - 3) {
+           renum = "," + a2.substr(i - 3, 3) + renum;
+           j++;
+       }
+       renum = a1 + a2.substr(0, a2.length - j * 3) + renum + a3;
+ 
+       return renum;
+   }
+
+$(function(){
+    $('.dataview').text(function(){
+        return  Convert($(this).text());
+    
+    });
+});
+</script>
+<script type="text/javascript">
+		$(document).ready(function(){
+			var leng = $("#listtable tr").length;  
+    		var newstr="";
+    		var oldstr=$("#listtable tr").eq(0).find("td:first").html();;
+    		var oldi=0;
+    		var newstr="";
+    		var ii=1;
+			    for(var i=0; i<leng; i++){
+			        newstr=$("#listtable tr").eq(i).find("td:first").html();  
+			        if (oldstr!=newstr){
+			        	for (var a=oldi+1;a<i;a++){
+			        		$("#listtable tr").eq(a).find("td:first").remove();
+			        	}
+			        	$("#listtable tr").eq(oldi).find("td:first").attr("rowspan",i-oldi);
+			        	oldstr=newstr;
+			        	oldi=i;
+			        	ii=0;
+
+			        }else{
+			        	ii++;
+			        }
+			      }
+			      if (newstr==oldstr){
+						for (var a=oldi+1;a<i;a++){
+			        		$("#listtable tr").eq(a).find("td:first").remove();
+			        	}
+			        	$("#listtable tr").eq(oldi).find("td:first").attr("rowspan",i-oldi);
+			      }
+			      
+		});
+	</script>
+
+<div class='maindiv'>
+<table class='maintable' id='listtable'>
+	<tr>
+		<th><div class="div_category">类别</div></th>
+		<th><div class="div_titlename">项目</div></th>
+		<th><a href="__URL__/modifydata/yearmonth/<{$yearmonth}>/day/99">同期</a></th>
+		<th><a href="__URL__/modifydata/yearmonth/<{$yearmonth}>/day/0">预测</a></th>
+		<th>月累计</a></th>
+		<php>
+			$startday=$_SESSION['mainshowall']==1?31:(int)date("d");
+
+		</php>
+		<for start="$hideday" end="0" comparison="gt" step="-1" name="i" >
+			<if condition="$_SESSION['level'] eq 2 ">
+					<th><a href="__URL__/modifydata/yearmonth/<{$yearmonth}>/day/<{$i}>"><div><{$i}></a></th>
+			<else /> 
+					<th><{$i}></th>
+			</if>
+			
+		</for>
+	</tr>
+	<foreach name='data' item='vo'>
+	<tr class="<{$vo['isdata']==1?'':'sum_month'}> data_grid">
+		<td><div><{$vo['category']}></div></td>
+		<td><div><{$vo['titlename']}><{$vo['titleid']}></div></td>
+		<td><div class='dataview'><{$vo['day99']==0?'':$vo['day99']}></div></td>
+		<td><div class='dataview'><{$vo['day0']==0?'':$vo['day0']}></div></td>
+		<td><div class='dataview month_sum'><{$vo['sum_month']==0?'':$vo['sum_month']}></div></td>
+
+		<for start="$startday" end="0" comparison="gt" step="-1" name="i" >
+			<php>$day='day'.$i;</php>
+			<td><div class='dataview'><{$vo[$day]==0?'':$vo[$day]}></div></td>			
+		</for>
+	</tr>
+	</foreach>
+</table>
+
+<table style="margin-top: 3px;">
+		<tr>
+			<th style="border-width:0px"><h3 style="float:left;padding:0;margin:0;">备注</h3></th>
+		</tr>
+		<tr>
+		<td class="memo">
+			<textarea name="" id="" cols="180" rows="10"><{$memo}></textarea>
+		</td>
+	</tr>
+
+</table>
+</div>
+
